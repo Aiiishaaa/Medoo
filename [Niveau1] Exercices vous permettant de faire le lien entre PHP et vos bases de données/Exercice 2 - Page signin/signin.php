@@ -1,3 +1,7 @@
+<?php
+       require_once 'database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -30,27 +34,26 @@
 
 <?php
 
-$firstName = htmlspecialchars($_POST["firstName"]);
-$isValidfirstName = !empty($firstName);
+    if (isset($_POST['confirm'])) {
+        $firstName = htmlspecialchars($_POST["firstName"]);
+        $isValidfirstName = !empty($firstName);
 
-$lastName = htmlspecialchars($_POST["lastName"]);
-$isValidlastName = !empty($lastName);
+        $lastName = htmlspecialchars($_POST["lastName"]);
+        $isValidlastName = !empty($lastName);
 
-$password = htmlspecialchars($_POST["password"]);
-$isValidpwd = !empty($password);
+        $password = htmlspecialchars($_POST["password"]);
+        $isValidpwd = !empty($password);
 
-$confirmpassword = htmlspecialchars($_POST["confirmpassword"]);
-$isValidconfirmpwd = !empty($confirmpassword);
+        $confirmpassword = htmlspecialchars($_POST["confirmpassword"]);
+        $isValidconfirmpwd = !empty($confirmpassword);
 
-$email = htmlspecialchars($_POST["email"]);
-$isValidemail = !empty($email);
+        $email = htmlspecialchars($_POST["email"]);
+        $isValidemail = !empty($email);
 
-$info = htmlspecialchars($_POST["info"]);
-$isValidinfo = !empty($info);
+        $info = htmlspecialchars($_POST["info"]);
+        $isValidinfo = !empty($info);
 
-
-if (isset($_POST['confirm'])) {
-    $condition = $_POST['condition'];
+        $condition = $_POST['condition'];
 
     if (empty($condition)){
         echo '<script type="text/javascript">';
@@ -75,14 +78,17 @@ if (isset($_POST['confirm'])) {
             else {
  
                 // $base = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root','');
-                include 'database.php';
                 
-                $queryReq = $base->prepare("SELECT email FROM users WHERE email = :email");
-                $queryReq->bindParam(':email', $email);
-                $queryReq->execute();
-                $data = $queryReq->fetch();
+               // $queryReq = $base->prepare("SELECT email FROM users WHERE email = :email");
+               // $queryReq->bindParam(':email', $email);
+               // $queryReq->execute();
+               // $data = $queryReq->fetch();
+
+                $data = $database -> get('users','email',['email'=> $email]);
+                var_dump($data);
 
                     if (!$data){
+
                             $firstName = $_POST['firstName'];
                             $lastName = $_POST['lastName'];
                             $email = $_POST['email'];
@@ -91,9 +97,17 @@ if (isset($_POST['confirm'])) {
 
                             $info = $_POST['info'];
 
-                            $base = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', '');
-                            $sql = "INSERT INTO users(firstName,lastName,password,email,info)VALUES('$firstName','$lastName','$passwordHash','$email','$info')"; 
-                            $base -> query($sql);
+                            //$base = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', '');
+                            //$sql = "INSERT INTO users(firstName,lastName,password,email,info)VALUES('$firstName','$lastName','$passwordHash','$email','$info')"; 
+                            //$base -> query($sql);
+
+                            $database -> insert('users',[
+                                'firstName'=>$firstName,
+                                'lastName' => $lastName,
+                                'password' => $password,
+                                'email' => $email,
+                                'info' => $info
+                            ]);
                     } 
                     else 
                     {

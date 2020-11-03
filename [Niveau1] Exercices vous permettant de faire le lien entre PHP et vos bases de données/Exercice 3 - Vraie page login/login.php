@@ -1,18 +1,22 @@
-<?php        
+<?php  
+ include_once 'database.php';  
+
     if (isset($_POST['submit']))
         {
             $login = $_POST['login'];
             $password = $_POST['password'];
+
             if (!empty($login) && !empty($password))
                 {
                 
-                    $bdd = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', '');
-                    $req = $bdd->prepare('SELECT * FROM connexions WHERE login = ? AND password = ?');
-                    $req-> execute(array(
-                        $login,
-                        $password));
- 
-                    $resultat = $req->fetch(PDO::FETCH_ASSOC);
+                  //  $bdd = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', '');
+                  // $req = $bdd->prepare('SELECT * FROM connexions WHERE login = ? AND password = ?');
+                  //  $req-> execute(array(
+                   //     $login,
+                   //     $password));
+                   //  $resultat = $req->fetch(PDO::FETCH_ASSOC);
+
+                   $resultat = $database -> get ("connexions",'*', [ 'login '=> $login && 'password' => $password ]);
  
                     if ($resultat || password_verify($password, $resultat['password']))
                     {
@@ -32,7 +36,6 @@
 
                             else
                             {
-
                                 if(!isset($_SESSION['nombre']))
                                     {
                                     // Initialisation de la variable
@@ -53,7 +56,7 @@
                                             if(!isset($_COOKIE['marqueur']))
                                             {
                                                 $timestamp_marque = time() + 60; // On le marque pendant une minute
-                                                            $cookie_vie = time() + 606024; // Durée de vie de 24 heures pour le décalage horaire
+                                                $cookie_vie = time() + 606024; // Durée de vie de 24 heures pour le décalage horaire
                                                 setcookie("marqueur", $timestamp_marque, $cookie_vie);
                                             }
                                     // on quitte le script
@@ -61,7 +64,6 @@
                                 }
 
                             }
-
                     }
                 }
 
