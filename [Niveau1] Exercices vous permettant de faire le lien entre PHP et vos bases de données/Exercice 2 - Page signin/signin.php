@@ -16,21 +16,32 @@
     <style>
 
     form{
-        margin-left: 300px;
-        margin-top: 100px;
+        margin-left: 150px;
+        margin-top: 50px;
     }
-    input  {
-    margin-left: 50px;
+    input{
+        margin-left: 40px;
     }
     button{
-        margin-top: 50px;
-        margin-left: 300px;
+        margin-top: 20px;
+        margin-left: 40%;
+    }
+     legend{
+         color :blueviolet;
+         font-size: 30px;
+         font-family: 'Times New Roman', Times, serif;
+     }
+    fieldset{
+        margin-right: 60%;
+        margin-left: 20%;
+    }
+    .checkbox{
+        margin-left: 30%;
+        text-align: center;
     }
     </style>
 </head>
 <body>
-
-
 
 <?php
 
@@ -77,8 +88,7 @@
             
             else {
  
-                // $base = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root','');
-                
+               // $base = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root','');
                // $queryReq = $base->prepare("SELECT email FROM users WHERE email = :email");
                // $queryReq->bindParam(':email', $email);
                // $queryReq->execute();
@@ -104,7 +114,7 @@
                             $database -> insert('users',[
                                 'firstName'=>$firstName,
                                 'lastName' => $lastName,
-                                'password' => $password,
+                                'password' => $passwordHash,
                                 'email' => $email,
                                 'info' => $info
                             ]);
@@ -128,15 +138,17 @@
 }
    
 ?>
- 
+ <fieldset>
+  
+       
  <form action="signin.php" method="post" class="form-group">
- <h2> S'inscrire </h2> <br>
+      <legend> Inscription </legend>
     <div class="form-group">
-        <label for="iprenom">Prenom :</label>
+        <label for="iprenom">Prénom:</label>
         <input type="text" name="firstName" id="iprenom">
     </div>
     <div class="form-group">
-        <label for="iname">Nom :</label>
+        <label for="iname">Nom:</label>
         <input type="text" name="lastName" id="nom">
     </div>
 
@@ -145,24 +157,26 @@
         <input type="text" name="password" id="ipassword">
     </div>
     <div class="form-group">
-        <label for="iconfirmpassword"> Confirmation :</label>
+        <label for="iconfirmpassword"> Confirmation:</label>
         <input type="text" name="confirmpassword">
     </div>
     <div class="form-group">
-        <label for="imail">    Email :</label>
+        <label for="imail"> Email:</label>
         <input type="text" name="email" id="imail">
     </div>
-   
     <div class="form-group">
-        <p>Statut :</p>
+        <p>Statut:</p>
         <input type="radio" id="ipro" name="info" value="professionnel" >
         <label for="professionnel">Professionnel</label><br>
         <input type="radio" id="ipart" name="info" value="particulier">
         <label for="particulier">Particulier</label> <br>
-  
-      <input style="margin-top:50px" type="checkbox" name="condition"> Je reconnais avoir pris connaissance des conditions d’utilisation et y adhère totalement.<br>
+     </div>
+      </fieldset>
+      <input type="checkbox" class="checkbox" name="condition"> Je reconnais avoir pris connaissance des conditions d’utilisation et y adhère totalement.<br>
     <button name="confirm"> Valider</button>  
-    </div>  
+     
     </form>
+
+
 </body>
 </html>

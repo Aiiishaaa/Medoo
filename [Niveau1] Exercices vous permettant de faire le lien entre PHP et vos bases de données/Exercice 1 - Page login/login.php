@@ -1,8 +1,7 @@
 
 <?php
  include 'database.php';
-       
-   
+          
        if (isset($_POST["submit"])) {
 
             $login = htmlspecialchars($_POST["login"]);
@@ -10,24 +9,27 @@
     
             $password = htmlspecialchars($_POST["password"]);
             $isValidPassword = !empty($password);
+
             $tentative = date ('Y-m-d H:i:s') ;
 
         $isValidAll = $isValidLogin && $isValidPassword && $tentative;
         
             if ($isValidAll){
-               $database -> insert ("connexion" , [
+                $database -> insert ("connexions" , [
                 "login"=> $login,
                 "password"=> $password,
-                "tentative"=> $tentative,
+                "date"=> $tentative
                ]);
-           
+        
             echo '<script type="text/javascript">';
             echo 'alert("Votre compte a été créé !")';
             echo  '</script>'; 
             }
             else
             {
-                echo " Les champs sont vides ! ";
+            echo '<script type="text/javascript">';
+            echo 'alert(" Les champs sont vides !")';
+            echo  '</script>';
             }
 
     }
@@ -42,8 +44,19 @@
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
            <title> Page Login </title>
        </head>
+       <style>
+        fieldset {
+            margin-right: 70%;
+            margin-left: 20%;
+        }
+        div {
+            margin:20px;
+        }
+      </style>
        
        <body>
+       <fieldset>
+       <legend >Connexion :</legend>
            <form class="form__group" action="login.php" method="post">
        
                <div class="form__group">
@@ -61,6 +74,7 @@
                </div>
        
            </form>
+       </fieldset>
        </body>
        
        </html>
