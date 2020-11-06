@@ -5,39 +5,39 @@
 
     if(isset($_POST['submit'])){
 
-        if(isset($_POST['password']) && isset($_POST['verifpassword'])){
+        if(empty($_POST['password']) && empty($_POST['verifpassword'])){
 
             $mdp = htmlspecialchars($_POST['password']);
             $mdp2 = htmlspecialchars($_POST['verifpassword']);
-            $password =  password_hash($mdp, PASSWORD_DEFAULT);
 
-        if($mdp !== $mdp2){
+                if($mdp !== $mdp2){
 
-            echo'<script type="text/javascript">';
-            echo'alert("Vos deux mots de passes ne sont pas indentiques!")';
-            echo'</script>';
+                    echo'<script type="text/javascript">';
+                    echo'alert("Vos deux mots de passes ne sont pas indentiques!")';
+                    echo'</script>';
 
-            if (!preg_match ( "/^[a-zA-Z0-9_-]{8,40}$/i", $mdp)){
-                echo '<script type="text/javascript">';
-                echo 'alert("Le mot de passe doit contenir au moins 8 caractéres sans espaces")';
-                echo  '</script>'; 
+                    if (!preg_match ( "/^[a-zA-Z0-9_-]{8,40}$/i", $mdp)){
+                        echo '<script type="text/javascript">';
+                        echo 'alert("Le mot de passe doit contenir au moins 8 caractéres sans espaces")';
+                        echo  '</script>'; 
+                    }
+                }
+
+            else{
+    
+            $utilisateur = $_SESSION['connexions'];
+             var_dump($utilisateur);
+            $database->update('connexions', ['password'=>$mdp]);
+            var_dump($database);
             }
         }
+  
         else{
-    
-             $utilisateur = $_SESSION['utilisateur'];
-             var_dump($utilisateur);
-            // $database->update('utilisateur',)
-            $database->update('utilisateur', ['motdepasse'=>$pass],['email'=>$utilisateur]);
+            echo '<script type="text/javascript">';
+            echo 'alert("Veuillez renseigner le nouveau mot de passe")';
+            echo  '</script>'; 
         }
     }
-   } 
-    else{
-        echo '<script type="text/javascript">';
-        echo 'alert("Veuillez renseigner le nouveau mot de passe")';
-        echo  '</script>'; 
-    }
-
 
 ?>
 <!DOCTYPE html>
@@ -75,7 +75,7 @@
 
         <div class="form-group">
             <label for="ipwd"> Taper votre nouveau mot de passe :</label>
-            <input type="text" name="passeword" id="ipwd">
+            <input type="text" name="password" id="ipwd">
         </div>
         <div class="form-group">
             <label for="ipasswordverif"> Confirmer le mot de passe :</label>

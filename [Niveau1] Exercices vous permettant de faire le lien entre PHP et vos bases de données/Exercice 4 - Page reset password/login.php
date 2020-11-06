@@ -1,64 +1,54 @@
-<?php        
-    if (isset($_POST['submit']))
-        {
-            $login = $_POST['login'];
-            $password = $_POST['password'];
-            if (!empty($login) && !empty($password))
-                {
-                    $bdd = new PDO('mysql:host=localhost;dbname=niv2-bdd;charset=utf8', 'root', '');
-                    $req = $bdd->prepare('SELECT * FROM connexions WHERE login = ? AND password = ?');
-                    $req-> execute(array(
-                        $login,
-                        $password));
-                    $resultat = $req->fetch(PDO::FETCH_ASSOC);
-                    session_start();
-                    if ($resultat || password_verify($password, $resultat['password']))
-                    {
-                        $_SESSION["login"] = $login;
-                        header("location: home.php");
-                    }
-                    else
-                    {
-                      
-                        if(!isset($_SESSION['nombre']))
-                            {
-                            // Initialisation de la variable
-                            $_SESSION['nombre'] = 1;
-                            // Blocage pendant 15 min
-                            $_SESSION['timestamp_limite'] = time() + 60*15;
+<?php      
+include ("database.php");
+
+$login = $_POST['login'];
+$password = $_POST['password'];
+
+    if (isset($_POST['submit'])) {
+         if (!empty($login) && !empty($password)) {
+                    date_default_timezone_set('Europe/Paris');
+                    setlocale(LC_TIME,"fr_FR.UTF-8", "French_France.1252");
+                    $date = date('Y-m-d H:i:s');
+                    
+                    $data = $database->get('connexions','*',['email'=>$login]);
+
+                    var_dump($data);
+                    if($data)
+                        {      if($data['password']){
+                                echo '<script type="text/javascript">';
+                                echo 'alert (" Vous êtes connectés !")';
+                                echo '</script>';
+
+                                $_SESSION['connexions'] = $data['email'];
+
+                                header("location:home.php");
+                              
+                                $database->insert('connexions',[
+                                    'email'=>$login,
+                                    'password'=>$result,
+                                    'date'=>$date     
+                                ]);
+
+                                var_dump($database)."<br><br>";
                             }
-                        if($_SESSION['nombre'] <= 5)
-                        {
-                            echo '<script type="text/javascript">';
-                            echo 'alert("Cet utilisateur existe déja dans la base de données! ")';
-                            echo  '</script>';                            
-                            $_SESSION['nombre']++;
-                        }
-                        // Si on a dépassé les 5 tentatives
-                        else
-                        {
-                            // Si le cookie marqueur n'existe pas on le crée                                     
-                            if(!isset($_COOKIE['marqueur']))
-                                    {
-                                    $timestamp_marque = time() + 60; // On le marque pendant une minute
-                                    $cookie_vie = time() + 606024; // Durée de vie de 24 heures pour le décalage horaire
-                                    setcookie("marqueur", $timestamp_marque, $cookie_vie);
-                                    }
-
-                            // on quitte le script
-                            exit();
-                        }          
+                            else{
+                                echo '<script type="text/javascript">';
+                                echo 'alert ("Les identifiants saisis sont incorrectes !")';
+                                echo '</script>';
+                            }
+            
                     }
-                }
-            else
-                {
-                    echo '<script type="text/javascript">';
-                    echo 'alert ("Renseignez votre email et votre mot de passe")';
-                    echo '</script>';
-                }
+        
+                        else{
+  
+                                echo '<script type="text/javascript">';
+                                echo 'alert ("Renseignez votre email et votre mot de passe")';
+                                echo '</script>';
+                        }
+                    }
         }
-
-        ?>
+       
+?>
 
 <!DOCTYPE html>
 <html lang="en">

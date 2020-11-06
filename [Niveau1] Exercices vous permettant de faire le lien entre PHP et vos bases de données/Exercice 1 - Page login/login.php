@@ -4,7 +4,7 @@
           
        if (isset($_POST["submit"])) {
 
-            $login = htmlspecialchars($_POST["login"]);
+            $login = $_POST["login"];
             $isValidLogin = !empty($login);
     
             $password = htmlspecialchars($_POST["password"]);
@@ -15,8 +15,19 @@
         $isValidAll = $isValidLogin && $isValidPassword && $tentative;
         
             if ($isValidAll){
+
+                 $Userexist = $database-> get ("connexions" , '*',[
+                 "email"=> $login]);
+
+                if ($Userexist) {
+                    echo '<script type="text/javascript">';
+                    echo 'alert(" Vous avez déja un compte!")';
+                    echo  '</script>';
+
+                } 
+                else {
                 $database -> insert ("connexions" , [
-                "login"=> $login,
+                "email"=> $login,
                 "password"=> $password,
                 "date"=> $tentative
                ]);
@@ -24,8 +35,10 @@
             echo '<script type="text/javascript">';
             echo 'alert("Votre compte a été créé !")';
             echo  '</script>'; 
+                }
+           
             }
-            else
+    else
             {
             echo '<script type="text/javascript">';
             echo 'alert(" Les champs sont vides !")';
