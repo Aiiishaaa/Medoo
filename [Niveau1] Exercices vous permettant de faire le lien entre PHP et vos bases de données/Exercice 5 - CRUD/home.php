@@ -1,16 +1,23 @@
+<?php 
+include 'database.php';
+?>
 <!DOCTYPE html>
     <html lang="en">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Page D'acceuil</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+ <title> Page D'acceuil</title>
     </head>
 <style>
-     div 
+     header {
+        text-align: center;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+     }
+  .bienvenue 
      {
-         margin-top: 10%;
-         margin-bottom: 5%;
+       
          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
          font-size:40px;
          text-align: center;
@@ -22,9 +29,7 @@
          margin-top: 20px;
          margin-right: 20%;
      }
-    .favorite {
-        margin-left: 43%;
-    }
+   
     .styled {
     border: 0;
     line-height: 2.5;
@@ -54,22 +59,64 @@
 
     </style>
     <body>
+
+        <header class="container-fluid bg-primary  p-2">
+            <h4 class="text-white">Mon premier CRUD</h4>
+       
         <?php 
             session_start();
-            echo '<div>';
-            echo ' Vous êtes connecté !';
+            echo '<div class="bienvenue">';
+            echo ' Bienvenue !';
             echo '</div>';
            
-        ?>
-        <button class="favorite styled"
-        type="button"> Modifier    
-        </button>
+        ?> 
+        </header>
+            
+        <div class="container w-75  pt-5"> 
+            <h3 class="text-center">Liste d'utilisateurs</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <th class="text-center text-white ">ID</th>
+                    <th class="text-center text-white"> Nom:</th>
+                    <th class="text-center text-white"> Prénom:</th>
+                    <th class="text-center text-white">mot de passe:</th>
+                    <th class="text-center text-white">Email: </th>
+                    <th class="text-center text-white"> Statut:</th>
+                    <th class="text-center text-white"> Action : </th>
+                </thead>
+                <tbody>
+                    <?php
+                       $count = $database->count("utilisateurs");
+                   
+                     var_dump($count);
+                     foreach($count as $utilisateurs) { ?>
+                    <tr>
+                        <td class="text-center m-0"><?= $utilisateurs ['ID'] ?></td>
+                        <td class="text-cente m-0"><?= $utilisateurs ['nom'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['prenom'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['motdepasse'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['email'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['statut'] ?></td>
+                         
+                        <td class="text-center m-0"> 
+                        <button class="styled" type="button"> Modifier    
+                            </button>
+                        <button class="styled" type="button"> Supprimer    
+                            </button>
+                        </td>
+                    </tr>
 
-        <button class="styled"
-        type="button"> Supprimer    
-        </button>
-         <br>
-        <a href="login.php">Se déconnecter</a>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <a href="signin.php" class="btn btn-success btn-sm"> Ajouter un utilisiteur</a>
+        </div>
+
+
+        <footer class=" container-fluid bg-primary fixed-bottom">
+            <a href="login.php"> Se déconnecter</a>
+
+        </footer>
     </body>
 
     </html>

@@ -3,61 +3,22 @@
 
     if (isset($_POST['submit']))
         {
-            $login = $_POST['login'];
-            $password = $_POST['password'];
+            $login =htmlspecialchars($_POST['login']) ;
+            $password =htmlspecialchars($_POST['password']);
 
             if (!empty($login) && !empty($password))
                 {
                 
-                  //  $bdd = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', '');
-                  // $req = $bdd->prepare('SELECT * FROM connexions WHERE login = ? AND password = ?');
-                  //  $req-> execute(array(
-                   //     $login,
-                   //     $password));
-                   //  $resultat = $req->fetch(PDO::FETCH_ASSOC);
-
                    $resultat = $database -> get ('connexions','*', [ 'email'=> $login ]);
                     var_dump($resultat);
  
-                    if ($resultat || password_verify($password, $resultat['password']))
+                    if ($resultat || password_verify($password, $resultat[$password]))
                     {
                         session_start();
                         $_SESSION["email"] = $login;
                         header("location: home.php");
                     }
-                            else
-                            {
-                                if(!isset($_SESSION['nombre']))
-                                    {
-                                    // Initialisation de la variable
-                                    $_SESSION['nombre'] = 0;
-                                    // Blocage pendant 15 min
-                                    $_SESSION['timestamp_limite'] = time() + 60*15;  
-                                    }
-                                    
-                                if($_SESSION['nombre'] <= 4)
-                                   {
-                                    echo '<script type="text/javascript">';
-                                    echo 'alert("Cet utilisateur existe déja dans la base de données! ")';
-                                    echo  '</script>';  
-                                    
-                                    $_SESSION['nombre']++;
-                                   }
-                                // Si on a dépassé les 5 tentatives
-                                else
-                                {
-                                    // Si le cookie marqueur n'existe pas on le crée
-                                            if(!isset($_COOKIE['marqueur']))
-                                            {
-                                                $timestamp_marque = time() + 60; // On le marque pendant une minute
-                                                $cookie_vie = time() + 606024; // Durée de vie de 24 heures pour le décalage horaire
-                                                setcookie("marqueur", $timestamp_marque, $cookie_vie);
-                                            }
-                                    // on quitte le script
-                                    exit();
-                                }
-
-                            }
+                           
                     }
 
             else
@@ -105,11 +66,11 @@
     <form method="post" action="login.php">
     <h4> Se connecter:</h4>
         <div class="form-group">
-            <label for="ilogin">Login :</label>
-            <input type="email" name="login" id="ilogin" placeholder="melanie@yahoo.com">
+            <label for="ilogin">Login:</label>
+            <input type="email" name="login" id="ilogin" placeholder="xxx.xxx@xxx.xx">
         </div>
         <div class="form-group">
-            <label for="ipassword">Mot de passe :</label>
+            <label for="ipassword">Mot de passe:</label>
             <input type="text" name="password" id="ipassword">
         </div>
         <button name="submit">Valider</button>
