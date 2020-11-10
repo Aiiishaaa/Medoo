@@ -1,11 +1,13 @@
 
 <?php
     session_start();
-    require_once ("database.php");
+    require ("database.php");
 
+    $token = $_GET[$token];
+ /* vérifier l'existance de token dans base de données si oui récupérer l'email associé  "pour l'utiliser dans update" */
     if(isset($_POST['submit'])){
 
-        if(empty($_POST['password']) && empty($_POST['verifpassword'])){
+        if(!empty($_POST['password']) && !empty($_POST['verifpassword'])){
 
             $mdp = htmlspecialchars($_POST['password']);
             $mdp2 = htmlspecialchars($_POST['verifpassword']);
@@ -24,11 +26,8 @@
                 }
 
             else{
-    
-            $utilisateur = $_SESSION['connexions'];
-             var_dump($utilisateur);
-            $database->update('connexions', ['password'=>$mdp]);
-            var_dump($database);
+                $database-> update('connexions', ['password'=>$mdp], ['email'=>$email]);
+        
             }
         }
   

@@ -8,7 +8,7 @@ include 'database.php';
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
- <title> Page D'acceuil</title>
+ <title> Page D'accueil</title>
     </head>
 <style>
      header {
@@ -77,21 +77,20 @@ include 'database.php';
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <th class="text-center text-white ">ID</th>
-                    <th class="text-center text-white"> Nom:</th>
-                    <th class="text-center text-white"> Prénom:</th>
-                    <th class="text-center text-white">mot de passe:</th>
-                    <th class="text-center text-white">Email: </th>
-                    <th class="text-center text-white"> Statut:</th>
-                    <th class="text-center text-white"> Action : </th>
+                    <th class="text-center text-white"> Nom</th>
+                    <th class="text-center text-white"> Prénom</th>
+                    <th class="text-center text-white">mot de passe</th>
+                    <th class="text-center text-white">Email </th>
+                    <th class="text-center text-white"> Statut</th>
+                    <th class="text-center text-white"> Action  </th>
                 </thead>
                 <tbody>
                     <?php
-                       $count = $database->count("utilisateurs");
+                       $count = $database-> select("utilisateurs","*");
                    
-                     var_dump($count);
                      foreach($count as $utilisateurs) { ?>
                     <tr>
-                        <td class="text-center m-0"><?= $utilisateurs ['ID'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['id'] ?></td>
                         <td class="text-cente m-0"><?= $utilisateurs ['nom'] ?></td>
                         <td class="text-center m-0"><?= $utilisateurs ['prenom'] ?></td>
                         <td class="text-center m-0"><?= $utilisateurs ['motdepasse'] ?></td>
@@ -99,17 +98,15 @@ include 'database.php';
                         <td class="text-center m-0"><?= $utilisateurs ['statut'] ?></td>
                          
                         <td class="text-center m-0"> 
-                        <button class="styled" type="button"> Modifier    
-                            </button>
-                        <button class="styled" type="button"> Supprimer    
-                            </button>
+                        <a href=" formuser.php" class="btn styled btn-success btn-dark"> Modifier  </a> 
+                        <a class="btn styled btn-success btn-dark"> Supprimer <?php include "deleteuser.php" ?> </a>
                         </td>
                     </tr>
 
                     <?php } ?>
                 </tbody>
             </table>
-            <a href="signin.php" class="btn btn-success btn-sm"> Ajouter un utilisiteur</a>
+            <a href="signin.php" class="btn btn-success btn-dark"> Ajouter un utilisiteur</a>
         </div>
 
 

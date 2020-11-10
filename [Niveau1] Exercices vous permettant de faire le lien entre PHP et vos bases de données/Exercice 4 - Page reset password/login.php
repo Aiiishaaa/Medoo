@@ -63,7 +63,8 @@ $password = $_POST['password'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       
-        fieldset {
+        fieldset { 
+    
             margin-top: 10%;
             margin-right: 60%;
             margin-left: 10%;
@@ -85,7 +86,7 @@ $password = $_POST['password'];
  
         <div class="form-group">
             <label for="ilogin">Login :</label>
-            <input type="email" name="login" id="ilogin" placeholder="melanie@yahoo.com">
+            <input type="email" name="login" id="ilogin" placeholder="xxx.xxx@xxx.xx">
         </div>
         <div class="form-group">
             <label for="ipassword">Mot de passe:</label>

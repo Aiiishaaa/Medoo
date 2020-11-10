@@ -21,7 +21,7 @@
 <form action="#" method="POST">
 <h2> Réinitailisation du mot de passe</h2>
 <label for="imail">Saisissez votre adresse mail :</label>
-<br><input type="email" name="email" placeholder=" Alex@yahoo.fr"/><br/><br/>
+<br><input type="email" name="email" placeholder=" xxx.xxx@xxx.xx"/><br/><br/>
 <button name="submit">Envoyer</button>
 </form>
 
@@ -37,12 +37,16 @@
                 $email_exist = $database-> get('connexions','*',['email'=>$email]);
                
                 if($email_exist ){
-                        $_SESSION['connexions']= $email_exist['id'];
+
+                        $_SESSION['id']= $email_exist['id'];
 
                         $token = bin2hex(random_bytes(32));
+                        /*
+récupérer l'email de la personne qui change son email  , le token aussi générer une date qui contient la date de mnt plus 30 min ---------- faire une sauvegarde dans la table tokenResetPwd */
+
                         $to = 'aicha.hamida06@yahoo.fr';
                         $subject= "Récuperatuion mot de passe";
-                        $body = "<p> Vous pouvez récuperer votre mot de passe via ce lien: <a href='http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php?token=".$token."'>http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php".$token."</a></p>";
+                        $body = "<p> Vous pouvez récuperer votre mot de passe via ce lien: <a href='http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php?token=".$token."'>http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php?token=".$token."</a></p>";
                     
                     send_mail($to,$subject,$body);  
 

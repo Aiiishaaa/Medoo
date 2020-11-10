@@ -116,7 +116,7 @@ $password = $_POST['password'];
             <input type="text" name="password" id="ipassword">
         </div>
         <button name="submit" class="styled" >SE CONNECTER</button>
-        <a href="signin.php"> <button class="styled" > S'INSCRIRE</button></a>
+        <a href="signin.php" class="btn styled" > S'INSCRIRE</button></a>
     </form>
 
 </body>
