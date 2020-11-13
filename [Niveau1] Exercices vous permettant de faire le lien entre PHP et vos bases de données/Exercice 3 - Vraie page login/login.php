@@ -18,9 +18,39 @@
                         $_SESSION["email"] = $login;
                         header("location: home.php");
                     }
-                           
-                    }
+                    else 
+                    {    
+                    
+                    if(!isset($tentative))
+                            {
+                            // Initialisation de la variable
+                            $tentative = 5;
+                            // Blocage pendant 15 min
+                            $_SESSION['timestamp_limite'] = time() + 60*15;
+                            }
+                    if($tentative <= 5)
+                            {
+                                $tentative--;
+                                echo '<script type="text/javascript">';
+                                echo 'alert("Mots de passe incorrect! il vous reste".$tentative."tentative")';
+                                echo  '</script>';                            
+                            }
+                        // Si on a dépassé les 5 tentatives
+                    else
+                        {
+                            // Si le cookie marqueur n'existe pas on le crée                                     
+                            if(!isset($_COOKIE['marqueur']))
+                                    {
+                                    $timestamp_marque = time() + 60; // On le marque pendant une minute
+                                    $cookie_vie = time() + 606024; // Durée de vie de 24 heures pour le décalage horaire
+                                    setcookie("marqueur", $timestamp_marque, $cookie_vie);
+                                    }
 
+                            // on quitte le script
+                            exit();
+                        }         
+            }
+        }
             else
                 {
                     echo '<script type="text/javascript">';

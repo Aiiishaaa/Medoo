@@ -1,10 +1,8 @@
 
 <?php
-    session_start();
     require ("database.php");
 
-    $token = $_GET[$token];
- /* vérifier l'existance de token dans base de données si oui récupérer l'email associé  "pour l'utiliser dans update" */
+
     if(isset($_POST['submit'])){
 
         if(!empty($_POST['password']) && !empty($_POST['verifpassword'])){
@@ -13,7 +11,6 @@
             $mdp2 = htmlspecialchars($_POST['verifpassword']);
 
                 if($mdp !== $mdp2){
-
                     echo'<script type="text/javascript">';
                     echo'alert("Vos deux mots de passes ne sont pas indentiques!")';
                     echo'</script>';
@@ -26,8 +23,10 @@
                 }
 
             else{
+                session_start();
+                $email =$_SESSION['email'];
                 $database-> update('connexions', ['password'=>$mdp], ['email'=>$email]);
-        
+                header('Location:login.php');
             }
         }
   

@@ -27,22 +27,19 @@
 
 <?php
         session_start();
-        require_once ("database.php");
-
+        require ("database.php");
         if(isset($_POST['submit'])){
             include "sendemail.php";
             $email= htmlspecialchars($_POST['email']);
             if(!empty($email)){
        
-                $email_exist = $database-> get('connexions','*',['email'=>$email]);
+                $email_exist = $database -> get ('connexions','*',['email'=>$email]);
                
                 if($email_exist ){
 
-                        $_SESSION['id']= $email_exist['id'];
+                        $_SESSION['connexions']= $email_exist['id'];
 
                         $token = bin2hex(random_bytes(32));
-                        /*
-récupérer l'email de la personne qui change son email  , le token aussi générer une date qui contient la date de mnt plus 30 min ---------- faire une sauvegarde dans la table tokenResetPwd */
 
                         $to = 'aicha.hamida06@yahoo.fr';
                         $subject= "Récuperatuion mot de passe";

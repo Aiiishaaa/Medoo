@@ -1,5 +1,14 @@
 <?php 
 include 'database.php';
+
+function deleteUser($id){
+
+        $database -> delete('utilisateurs', ['id' => $id]);
+    }
+    
+if(isset($_POST['delData'])){
+    deleteUser($_POST['id']);
+}
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -11,7 +20,7 @@ include 'database.php';
  <title> Page D'accueil</title>
     </head>
 <style>
-     header {
+    header {
         text-align: center;
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
      }
@@ -28,6 +37,7 @@ include 'database.php';
          float: right;
          margin-top: 20px;
          margin-right: 20%;
+         color :#000;
      }
    
     .styled {
@@ -66,23 +76,22 @@ include 'database.php';
         <?php 
             session_start();
             echo '<div class="bienvenue">';
-            echo ' Bienvenue !';
+            echo 'LISTE DE UTILISATEURS  !';
             echo '</div>';
            
         ?> 
         </header>
             
         <div class="container w-75  pt-5"> 
-            <h3 class="text-center">Liste d'utilisateurs</h3>
+        
             <table class="table table-bordered">
                 <thead class="thead-dark">
-                    <th class="text-center text-white ">ID</th>
+                    <th class="text-center text-white "> ID </th>
                     <th class="text-center text-white"> Nom</th>
                     <th class="text-center text-white"> Prénom</th>
-                    <th class="text-center text-white">mot de passe</th>
-                    <th class="text-center text-white">Email </th>
+                    <th class="text-center text-white"> Email</th>
                     <th class="text-center text-white"> Statut</th>
-                    <th class="text-center text-white"> Action  </th>
+                    <th class="text-center text-white"> Action</th>
                 </thead>
                 <tbody>
                     <?php
@@ -93,13 +102,12 @@ include 'database.php';
                         <td class="text-center m-0"><?= $utilisateurs ['id'] ?></td>
                         <td class="text-cente m-0"><?= $utilisateurs ['nom'] ?></td>
                         <td class="text-center m-0"><?= $utilisateurs ['prenom'] ?></td>
-                        <td class="text-center m-0"><?= $utilisateurs ['motdepasse'] ?></td>
                         <td class="text-center m-0"><?= $utilisateurs ['email'] ?></td>
                         <td class="text-center m-0"><?= $utilisateurs ['statut'] ?></td>
                          
                         <td class="text-center m-0"> 
                         <a href=" formuser.php" class="btn styled btn-success btn-dark"> Modifier  </a> 
-                        <a class="btn styled btn-success btn-dark"> Supprimer <?php include "deleteuser.php" ?> </a>
+                        <a href=" deleteuser.php" class="btn styled btn-success btn-dark"  name ="delData"> Supprimer </a>
                         </td>
                     </tr>
 

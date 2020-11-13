@@ -1,14 +1,69 @@
-
 <?php
-  require 'database.php';
+include 'database.php';
+$message="";
+
+$id = $_GET['id'];
+
+if($id > 0){
+    $utilisateurs = $database->get("utilisateurs", [
+        "id",
+        "nom", 
+        "prenom", 
+        "email", 
+        "statut"
+    ], [
+        "id" => $id
+    ]);
+}
+
+
+if (isset($_POST["submit"])){
+
+    $id = $_POST["id"];
+    $nom =htmlspecialchars($_POST["nom"]);
+    $nomValid = !empty($nom);
+
+    $prenom =htmlspecialchars($_POST["prenom"]);
+    $prenomValid = !empty($prenom);
+
+    $email = htmlspecialchars($_POST["email"]);
+    $emailValid = !empty($email);
+
+    $password =htmlspecialchars($_POST["password"]);
+    $confirmPassword=htmlspecialchars($_POST["confirmPassword"]);
+
+
+      
+    $statut=htmlspecialchars($_POST["statut"]);
+    $statutValid = !empty($statut);
+
+
+    $succes = $nomValid && $prenomValid && $emailValid && $statutValid;
+
+    if($succes){
+
+        $database->update("utilisateurs", [
+            "nom" => $nom,
+            "prenom" => $prenom,
+            "email" => $email,
+            "statut" => $statut
+        ], [
+            "id" => $id
+        ]);
+       
+    header("Location:home.php");
+}
+
+
 ?>
+ 
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in</title>
+    <title>UpDATE USER</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -47,8 +102,6 @@
 </head>
 <body>
 
-   
-?>
 
  <form action="#" method="post" class="form-group">
  <fieldset>
@@ -65,11 +118,6 @@
         <input type="text" name="prenom" id="iprenom">
     </div>
 
-     <div class="form-group">
-        <label for="ipassword">Mot de passe:</label>
-        <input type="text" name="motdepasse" id="ipassword">
-    </div>
-
 
     <div class="form-group">
         <label for="imail">Email:</label>
@@ -83,8 +131,8 @@
  
       
       <button  name="confirm"> Mettre à jour </button>  
-       </fieldset> 
-    </form>
+ </fieldset> 
+</form>
 
  
 </body>
