@@ -10,7 +10,7 @@ if (!isset($_SESSION["email"])){
 
         
 $req = $database->select("utilisateurs", [
-            "ID",
+            "id",
             "nom",
             "prenom",
             "email",
@@ -25,7 +25,8 @@ $req = $database->select("utilisateurs", [
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php include ('style.php')?>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
         <title>Page d'accueil</title>
     </head>
 
@@ -47,13 +48,13 @@ $req = $database->select("utilisateurs", [
                 <tbody>
                     <?php foreach($req as $utilisateur){ ?>
                     <tr>
-                        <td class="text-center m-0"><?= $utilisateur ['ID'] ?></td>
-                        <td class="text-cente m-0"><?= $utilisateur ['nom'] ?></td>
-                        <td class="text-center m-0"><?= $utilisateur ['prenom'] ?></td>
-                        <td class="text-center m-0"><?= $utilisateur ['email'] ?></td>
-                        <td class="text-center m-0"><?= $utilisateur ['statut'] ?></td>
-                        <td class="text-center m-0"><a href="modif.php?id=<?= $utilisateur ['ID']?>" class="btn btn-secondary btn-sm">Mettre a jour</a>
-                        <a href="supp.php?id=<?= $utilisateur ['ID']?>" class="btn btn-danger btn-sm">Supprimer</a></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['id'] ?></td>
+                        <td class="text-cente m-0"><?= $utilisateurs ['nom'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['prenom'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['email'] ?></td>
+                        <td class="text-center m-0"><?= $utilisateurs ['statut'] ?></td>
+                        <td class="text-center m-0"><a href="formuser.php?id=<?= $utilisateur ['ID']?>" class="btn btn-secondary btn-sm">Mettre à jour</a>
+                        <a href="delete.php?id=<?= $utilisateurs ['id']?>" class="btn btn-danger btn-sm">Supprimer</a></td>
                     </tr>
                     <?php } ?>
                 </tbody>
