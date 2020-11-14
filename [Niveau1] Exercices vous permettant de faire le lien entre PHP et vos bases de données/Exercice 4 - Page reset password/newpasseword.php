@@ -44,30 +44,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nouveau mot de passe</title>
-</head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     button{
-       margin-left:70%;
+       margin-left:40%;
     }
     legend{
         text-align: center;
     }
     fieldset {
-            margin-right: 60%;
-            margin-left: 20%;
-            padding-top: 20px;
+            margin-left:30%;
+            width: 40%;
+            background-image: -moz-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            background-image: -webkit-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            background-image: -ms-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -o-justify-content: center;
+            -ms-justify-content: center;
+            -moz-justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -o-align-items: center;
+            -ms-align-items: center;
+            -moz-align-items: center;
+            -webkit-align-items: center;
     }
-    div{
-        margin-bottom: 30px;
-    }
-    input{
-        margin-top: 10px;
-    }
+  
+     label{
+         margin-right:40%;
+     }
 </style>
-<body>
+
+</head>
 <body>
 <fieldset>
-       <legend > Réinitailisation du mot de passe </legend>
+    <legend > <h1>Réinitailisation du mot de passe </h1></legend>
     <form method="post" action="#">
   
 
@@ -79,7 +96,9 @@
             <label for="ipasswordverif"> Confirmer le mot de passe :</label>
             <input type="text" name="verifpassword" id="ipasswordverif">
         </div>
-        <button name="submit">Valider</button>
+        <div class="form-group">
+        <button name="submit" class="btn btn-dark">Valider</button>
+        </div>
       
     </form>
 </fieldset>

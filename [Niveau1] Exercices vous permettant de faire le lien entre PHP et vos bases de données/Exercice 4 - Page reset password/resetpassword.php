@@ -10,19 +10,50 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-       form{
-            margin-left: 20%;
-            margin-top: 10%;
-        }
+         fieldset{
+            margin-left: 30%;
+            font-family: Tahoma, sans-serif;
+            width: 38%;
+            height: 250px;
+            background-image: -moz-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            background-image: -webkit-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            background-image: -ms-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -o-justify-content: center;
+            -ms-justify-content: center;
+            -moz-justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -o-align-items: center;
+            -ms-align-items: center;
+            -moz-align-items: center;
+            -webkit-align-items: center;
+         }
+      legend {
+          text-align: center;
+          margin-bottom:10%;
+      }
+      button{
+          margin-left: 30%;
+      }
     </style>
     
 </head>
-
+<body>
+<fieldset>
+       <legend><h1> Réinitailisation du mot de passe</h1></legend>
 <form action="#" method="POST">
-<h2> Réinitailisation du mot de passe</h2>
+
+<div class="form-group">
 <label for="imail">Saisissez votre adresse mail :</label>
-<br><input type="email" name="email" placeholder=" xxx.xxx@xxx.xx"/><br/><br/>
-<button name="submit">Envoyer</button>
+<br>
+<input type="email" name="email" placeholder=" xxx.xxx@xxx.xx"/><br/><br/>
+</div>
+<div class="form-group">
+    <button name="submit" class ="btn btn-dark mb-5 ">Envoyer</button>
+</div>
 </form>
 
 <?php

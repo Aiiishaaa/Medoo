@@ -14,31 +14,50 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-
-    form{
-        margin-left: 150px;
-        margin-top: 50px;
-    }
-    input{
-        margin-left: 40px;
-    }
-    button{
-        margin-top: 20px;
-        margin-left: 40%;
-    }
-     legend{
-         color :blueviolet;
-         font-size: 30px;
-         font-family: 'Times New Roman', Times, serif;
-     }
-    fieldset{
-        margin-right: 60%;
-        margin-left: 20%;
-    }
-    .checkbox{
-        margin-left: 30%;
-        text-align: center;
-    }
+ 
+        fieldset {
+                    margin-left:40%;
+                    width: 20%;
+                    background-image: -moz-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+                    background-image: -webkit-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+                    background-image: -ms-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+                    display: flex;
+                    display: -webkit-flex;
+                    justify-content: center;
+                    -o-justify-content: center;
+                    -ms-justify-content: center;
+                    -moz-justify-content: center;
+                    -webkit-justify-content: center;
+                    align-items: center;
+                    -o-align-items: center;
+                    -ms-align-items: center;
+                    -moz-align-items: center;
+                    -webkit-align-items: center;
+                }
+            div {
+                    margin:30px;
+                }
+            legend{
+                    text-align: center;
+                }
+            ::placeholder {
+                color: hsl(30, 100%, 50%);
+                font-family: 'Times New Roman', Times, serif;
+                font-weight: bolder;
+                opacity: 1; 
+                }
+            
+            input{
+                margin-left: 40px;
+            }
+            button{
+                margin-top: 20px;
+                margin-left: 30%;
+            }
+            body {
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            }
+        
     </style>
 </head>
 <body>
@@ -139,31 +158,35 @@
    
 ?>
  <fieldset>
-  
+    <legend><h1>Inscription</h1></legend>
        
  <form action="signin.php" method="post" class="form-group">
-      <legend> Inscription </legend>
+    
     <div class="form-group">
         <label for="iprenom">Prénom:</label>
         <input type="text" name="firstName" id="iprenom">
     </div>
+
     <div class="form-group">
         <label for="iname">Nom:</label>
-        <input type="text" name="lastName" id="nom">
+        <input type="text" name="lastName" id="iname">
     </div>
 
      <div class="form-group">
         <label for="ipassword">Mot de passe:</label>
         <input type="text" name="password" id="ipassword">
     </div>
+
     <div class="form-group">
         <label for="iconfirmpassword"> Confirmation:</label>
-        <input type="text" name="confirmpassword">
+        <input type="text" name="confirmpassword" id="iconfirmpassword">
     </div>
+
     <div class="form-group">
         <label for="imail"> Email:</label>
         <input type="text" name="email" id="imail">
     </div>
+
     <div class="form-group">
         <p>Statut:</p>
         <input type="radio" id="ipro" name="info" value="professionnel" >
@@ -171,10 +194,11 @@
         <input type="radio" id="ipart" name="info" value="particulier">
         <label for="particulier">Particulier</label> <br>
      </div>
+     <div class="form-group">
+     <input type="checkbox" class="checkbox" name="condition"> Je reconnais avoir pris connaissance des conditions d’utilisation et y adhère totalement.<br>
+    <button name="confirm" class="btn btn-dark">Valider</button>  
+    </div>
       </fieldset>
-      <input type="checkbox" class="checkbox" name="condition"> Je reconnais avoir pris connaissance des conditions d’utilisation et y adhère totalement.<br>
-    <button name="confirm"> Valider</button>  
-     
     </form>
 
 

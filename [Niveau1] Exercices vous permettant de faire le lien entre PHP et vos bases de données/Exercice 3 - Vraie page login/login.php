@@ -76,34 +76,58 @@
     <style>
      
         fieldset {
-            margin-top: 5%;
-            margin-right: 70%;
-            margin-left: 20%;
+            margin-left: 40%;
+            width: 15%;
+            background-image: -moz-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            background-image: -webkit-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            background-image: -ms-linear-gradient( 136deg, rgb(254,225,64) 0%, rgb(250,112,154) 100%);
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -o-justify-content: center;
+            -ms-justify-content: center;
+            -moz-justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -o-align-items: center;
+            -ms-align-items: center;
+            -moz-align-items: center;
+            -webkit-align-items: center;
         }
-        div {
+        legend{
+            text-align: center;
+        }
+        div{
             margin:20px;
         }
-         button{
-            margin-left:40%;
-
-         }
+        button{
+            margin-left:25%;
+        }
+        body {
+             font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
     </style>
     
 </head>
 <body>
 <fieldset>
- 
+     <legend><h1> Se connecter </h1></legend>
     <form method="post" action="login.php">
-    <h4> Se connecter:</h4>
+
         <div class="form-group">
             <label for="ilogin">Login:</label>
             <input type="email" name="login" id="ilogin" placeholder="xxx.xxx@xxx.xx">
         </div>
+
         <div class="form-group">
             <label for="ipassword">Mot de passe:</label>
             <input type="text" name="password" id="ipassword">
         </div>
-        <button name="submit">Valider</button>
+
+        <div class="form-group">
+        <button name="submit" class="btn btn-dark mb-5">Valider</button>
+        </div>
+
     </form>
 </fieldset>
 </body>
