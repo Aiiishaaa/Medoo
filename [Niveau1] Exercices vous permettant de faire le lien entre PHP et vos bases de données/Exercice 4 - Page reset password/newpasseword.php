@@ -1,10 +1,8 @@
-
 <?php
     require ("database.php");
-
-
+  
     if(isset($_POST['submit'])){
-
+   
         if(!empty($_POST['password']) && !empty($_POST['verifpassword'])){
 
             $mdp = htmlspecialchars($_POST['password']);
@@ -23,9 +21,10 @@
                 }
 
             else{
-                session_start();
-                $email =$_SESSION['email'];
-                $database-> update('connexions', ['password'=>$mdp], ['email'=>$email]);
+                 
+                $database->update('connexions',['password'=>$mdp],
+                ['email'=>$email]);
+
                 header('Location:login.php');
             }
         }
@@ -75,27 +74,27 @@
             -moz-align-items: center;
             -webkit-align-items: center;
     }
-  
-     label{
+    label{
          margin-right:40%;
-     }
+    }
 </style>
 
 </head>
 <body>
 <fieldset>
-    <legend > <h1>Réinitailisation du mot de passe </h1></legend>
+    <legend><h1>Réinitailisation du mot de passe </h1></legend>
     <form method="post" action="#">
   
-
         <div class="form-group">
             <label for="ipwd"> Taper votre nouveau mot de passe :</label>
             <input type="text" name="password" id="ipwd">
         </div>
+
         <div class="form-group">
             <label for="ipasswordverif"> Confirmer le mot de passe :</label>
             <input type="text" name="verifpassword" id="ipasswordverif">
         </div>
+
         <div class="form-group">
         <button name="submit" class="btn btn-dark">Valider</button>
         </div>

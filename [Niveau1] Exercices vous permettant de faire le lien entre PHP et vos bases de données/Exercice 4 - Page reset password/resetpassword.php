@@ -1,3 +1,55 @@
+<?php
+       
+        require ("database.php");
+       
+        require_once ("sendemail.php");
+        if(isset($_POST['submit'])){
+         session_start();
+         
+            $email= htmlspecialchars($_POST['email']);
+            $tentative = date('Y-m-d H:i:s');
+    
+            if(!empty($email)){
+       
+                $email_exist = $database -> get ('connexions','*',['email'=>$email]);
+               
+                if($email_exist ){
+                        $token= uniqid();
+                        $database->insert("tokenresetpwd", [
+                            "email" => $email,
+                            "token" => $token,
+                            "expireDate" => $tentative,
+                        
+                        ]);
+              
+                        $to = 'aicha.hamida06@yahoo.fr';
+                        $subject= "Récuperatuion mot de passe";
+                        $body = "<p> Vous pouvez récuperer votre mot de passe via ce lien: <a href='http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php?token=".$token."'>http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php?token=".$token."</a></p>";
+                    
+                    send_mail($to,$subject,$body);  
+
+                    echo '<script type="text/javascript">';
+                    echo 'alert (" Consultez votre boite mail !")';
+                    echo '</script>';
+
+                }
+                    else{
+                        echo '<script type="text/javascript">';
+                        echo 'alert ("Adresse mail inexistante !")';
+                        echo '</script>';
+                    }
+    }
+    else{
+
+        echo '<script type="text/javascript">';
+        echo 'alert ("Remplissez le champs email !")';
+        echo '</script>';    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -55,44 +107,6 @@
     <button name="submit" class ="btn btn-dark mb-5 ">Envoyer</button>
 </div>
 </form>
-
-<?php
-        session_start();
-        require ("database.php");
-        if(isset($_POST['submit'])){
-            include "sendemail.php";
-            $email= htmlspecialchars($_POST['email']);
-            if(!empty($email)){
-       
-                $email_exist = $database -> get ('connexions','*',['email'=>$email]);
-               
-                if($email_exist ){
-
-                        $_SESSION['connexions']= $email_exist['id'];
-
-                        $token = bin2hex(random_bytes(32));
-
-                        $to = 'aicha.hamida06@yahoo.fr';
-                        $subject= "Récuperatuion mot de passe";
-                        $body = "<p> Vous pouvez récuperer votre mot de passe via ce lien: <a href='http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php?token=".$token."'>http://localhost/Medoo/%5bNiveau1%5d%20Exercices%20vous%20permettant%20de%20faire%20le%20lien%20entre%20PHP%20et%20vos%20bases%20de%20donn%c3%a9es/Exercice%204%20-%20Page%20reset%20password/newpasseword.php?token=".$token."</a></p>";
-                    
-                    send_mail($to,$subject,$body);  
-
-                    echo '<script type="text/javascript">';
-                    echo 'alert (" Consultez votre boite mail !")';
-                    echo '</script>';
-
-                }
-                    else{
-                        echo '<script type="text/javascript">';
-                        echo 'alert ("Adresse mail inexistante !")';
-                        echo '</script>';
-                    }
-    }
-    else{
-
-        echo '<script type="text/javascript">';
-        echo 'alert ("Remplissez le champs email !")';
-        echo '</script>';    }
-}
-?>
+</fieldset>
+</body>
+</html>

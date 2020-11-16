@@ -11,14 +11,7 @@ require 'PHPMailer/src/SMTP.php';
 
 
 // test : mettez votre adresse email à vous pour vérifier que ça marche
-send_mail("aicha.hamida06@yahoo.fr", "sujet du mail : test", "mail de test") ;
-
-
-
-
-
-
-
+send_mail("", "sujet du mail : test", "mail de test") ;
 
 
 /*******************
