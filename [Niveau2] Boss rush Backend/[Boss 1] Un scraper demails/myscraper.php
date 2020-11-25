@@ -48,7 +48,7 @@ if (isset($_POST['url'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
-    <title>
+<title> Scraper d'emails </title>
 
 <head>
     <meta charset="UTF-8">
@@ -60,6 +60,7 @@ if (isset($_POST['url'])) {
         .hidden {
             display: none;
         }
+       
     </style>
     <script>
         $(function() {
@@ -117,16 +118,18 @@ if (isset($_POST['url'])) {
             });
         });
     </script>
-    <title>Email scraper</title>
+  
 </head>
 
-<body>
-<div>
-    <form action="" method="POST">
-        <label for="url">Url :</label>
+<body style="text-align:center">
+
+    <h3> Scraper d'emails </h3>
+    <form action="" method="POST">  
+        <label for="url"> <URL:</label>
         <input type="text" id="url" name='url'>
-        <button type="submit">Envoyer</button>
+        <button type="submit">Envoyer</button>  
     </form>
+ </fieldset>
 </div>
 
     <?php if (isset($nbEmailFound) && $nbEmailFound != 0) : ?>
@@ -156,7 +159,7 @@ if (isset($_POST['url'])) {
                 foreach ($emails as $email) : $i++ ?>
 
                     <?php if ($i == 1) : ?>
-                        <tr>
+      >                  <tr>
                         <?php endif; ?>
 
                         <td><?php echo $email; ?></td>
