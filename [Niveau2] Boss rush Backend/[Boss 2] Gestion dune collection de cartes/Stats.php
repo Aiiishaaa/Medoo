@@ -28,7 +28,7 @@ class Stats
 	// renvoie la somme du prix de tous les cartes en base de données
 	function getTotalValue()
 	{
-		return $this->database->sum(......); // TODO : on veut faire la somme du prix de toutes les cartes en une seule requête
+		return $this->database->sum('cartes','prix'); // TODO : on veut faire la somme du prix de toutes les cartes en une seule requête
 		// doc : https://medoo.in/api/sum
 	}
 }
